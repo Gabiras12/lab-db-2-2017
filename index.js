@@ -8,6 +8,5 @@ var url = 'mongodb://localhost:27017/labdb';
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
   console.log("Connected successfully to server");
-
   db.close();
 });

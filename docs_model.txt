@@ -1,0 +1,102 @@
+-- Documents modeling
+
+Document: `Document`
+{
+  id: 'gerado pelo mongodb'
+  number: 10,
+  title: 'xxxxxxxx',
+  abstract: 'dddddd',
+  key-words: [key-words],
+  subject: {
+    number: 9,
+    description: 'texto'
+  },
+  author_id: id
+  institution_id: id
+  release_date: date
+}
+
+Document: `key_words`
+{
+  id: <id>
+  documents: [document_id, document_id]
+  word: '<string>'
+}
+---------------- Document types -----------------
+
+Document: `magazine`
+
+{
+  document_id: 'id',
+  name:
+  page
+  section
+  edition
+  publisher_id: <id>
+}
+
+Document: `book`
+{
+  document_id: 'id',
+  name:
+  initial_page:
+  edition:
+  publisher_id: <id>
+}
+
+Document `publisher:`
+{
+  number:
+  name:
+  url:
+  email: [email1, email2] - optional
+}
+
+Document: `article`
+{
+  document_id: 'id',
+  url: -- optional field
+  date_access: -- optional field
+  event: {
+    number:
+    name:
+    location:
+    date:
+  }
+}
+
+Document: `dissertation`
+{
+  document_id: 'id',
+  name:
+  session:
+}
+
+ ---------------- AUTHOR -----------------
+Document `Author`
+{
+  number:
+  name:
+  email: [email1, email2]
+}
+
+Document `Pesquisador`
+{
+  author_id: <id>
+  title:
+  project:
+}
+
+Document `Profissional`
+{
+  author_id: <id>
+  area:
+}
+
+Document `Institution`
+{
+  numero:
+  name:
+  email: [email1, email2] -- optional
+  url:
+}
