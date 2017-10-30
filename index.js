@@ -1,12 +1,18 @@
-var MongoClient = require('mongodb').MongoClient
-  , assert = require('assert');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/labdb', { useMongoClient: true });
+mongoose.Promise = global.Promise;
+var Schemas = require('./schemas');
 
-// Connection URL
-var url = 'mongodb://localhost:27017/labdb';
+var author = new Schemas.Author({
+  _id: new mongoose.Types.ObjectId(),
+  name: 'José Felino',
+  email: ['jose_felino213@bol.com', 'josefelino213@gmail.com']
+})
 
-// Use connect method to connect to the server
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  console.log("Connected successfully to server");
-  db.close();
-});
+author.save(function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Object was insert successfully');
+  }
+})

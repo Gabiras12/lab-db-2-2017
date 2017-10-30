@@ -3,7 +3,6 @@
 Document: `Document`
 {
   id: 'gerado pelo mongodb'
-  number: 10,
   title: 'xxxxxxxx',
   abstract: 'dddddd',
   key-words: [key-words],
