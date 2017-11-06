@@ -37,12 +37,14 @@ var documentSchema = Schema({
   _id: Schema.Types.ObjectId,
   title: String,
   abstract: String,
-  keywords: [{ type: Schema.Types.ObjectId, ref: 'Keyword' }],
+  // keywords: [{ type: Schema.Types.ObjectId, ref: 'Keyword' }],
+  keywords: [String],
   subject: {
     id: Number,
     description: String
   },
-  release_date: Date
+  release_date: Date,
+  author: { type: Schema.Types.ObjectId, ref: 'Author' }
 });
 
 var magazineSchema = Schema({
@@ -66,16 +68,16 @@ var bookSchema = Schema({
 
 var publisherSchema = Schema({
   _id: Schema.Types.ObjectId,
-  name: String
-  url: String
+  name: String,
+  url: String,
   email: [String]
 })
 
 var eventSchema = Schema({
   _id: Schema.Types.ObjectId,
   documentObject: { type: Schema.Types.ObjectId, ref: 'DocumentObject' },
-  dateAccess: Date
-  url: String
+  dateAccess: Date,
+  url: String,
   event: {
     name: String,
     location: String,
@@ -90,26 +92,28 @@ var dissertationSchema = Schema({
   session: Number
 })
 
-var Institution = mongoose.model('Institution', institutionSchema);
-var Author = mongoose.model('Author', authorSchema);
-var Researcher = mongoose.model('Reasearcher', researcherSchema);
-var Profissional = mongoose.model('Profissional', profissionalSchema);
-var Keyword = mongoose.model('Keyword', keywordsSchemas);
-var DocumentObject = mongoose.model('DocumentObject', documentSchema);
-var Magazine = mongoose.model('Magazine', magazineSchema);
-var Book = mongoose.model('Book', bookSchema);
-var Publisher = mongoose.model('Publisher', publisherSchema);
-var EventObejct = mongoose.model('EventObejct', eventSchema);
-var Dissertation = mongoose.model('Dissertation', dissertationSchema);
+var articleSchema = Schema({
+  _id: Schema.Types.ObjectId,
+  documentObject: { type: Schema.Types.ObjectId, ref: 'DocumentObject' },
+  url: String,
+  date_access: Date,
+  eventObejct: { type: Schema.Types.ObjectId, ref: 'EventObejct' }
+});
 
-exports.Author = Author
-exports.DocumentObject = DocumentObject
-exports.Keyword = Keyword
-exports.Institution = Institution
-exports.Profissional = Profissional
-exports.Researcher = Researcher
-exports.Magazine = Magazine
-exports.Book = Book
-exports.Publisher = Publisher
-exports.EventObejct = EventObejct
-exports.Dissertation = Dissertation
+
+export class Schemas {
+  constructor() {
+    this.institution = mongoose.model('Institution', institutionSchema);
+    this.author = mongoose.model('Author', authorSchema);
+    this.researcher = mongoose.model('Reasearcher', researcherSchema);
+    this.profissional = mongoose.model('Profissional', profissionalSchema);
+    // this.keyword = mongoose.model('Keyword', keywordsSchemas);
+    this.documentObject = mongoose.model('DocumentObject', documentSchema);
+    this.magazine = mongoose.model('Magazine', magazineSchema);
+    this.book = mongoose.model('Book', bookSchema);
+    this.publisher = mongoose.model('Publisher', publisherSchema);
+    this.eventObejct = mongoose.model('EventObejct', eventSchema);
+    this.dissertation = mongoose.model('Dissertation', dissertationSchema);
+    this.article = mongoose.model('Article', articleSchema);
+  }
+}
