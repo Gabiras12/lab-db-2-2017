@@ -12,11 +12,26 @@ export class Factory {
   createAuthor(completion) {
     var name = readlineSync.question('Name: ');
     var email = readlineSync.question('Email: ');
+    var cpf = readlineSync.question("cpf: ");
+    var rg = readlineSync.question("rg: ");
+    var filiation = readlineSync.question("filiation: ");
+    var sex = readlineSync.question("sex: ");
+    var civilState = readlineSync.question("civilState: ");
+    var nationality = readlineSync.question("nationality: ");
+    var emails = readlineSync.question("emails: ");
+    var address = readlineSync.question("Address id: ");
 
     var author = schemas.author({
       _id: new mongoose.Types.ObjectId(),
       name: name,
-      emails: email
+      emails: email,
+      cpf: cpf,
+      rg: rg,
+      filiation: filiation,
+      sex: sex,
+      civilState: civilState,
+      nationality: nationality,
+      emails: emails
     })
 
     author.save((err) => {

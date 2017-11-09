@@ -4,8 +4,51 @@ var Schema = mongoose.Schema;
 var authorSchema = Schema({
   _id: Schema.Types.ObjectId,
   name: String,
-  emails: [String]
+  cpf: String,
+  rg: String,
+  filiation: [String],
+  sex: String,
+  civilState: String,
+  nationality: String,
+  emails: [String],
+  address: { type: Schema.Types.ObjectId, ref: 'Address' }
 });
+
+var addressSchema = Schema({
+  _id: Schema.Types.ObjectId,
+  number: Number,
+  complement: String,
+  postcode: Number,
+  address: String
+  neighborhood: { type: Schema.Types.ObjectId, ref: 'Neighborhood' }
+});
+
+var neighborhoodSchema = Schema({
+  _id: Schema.Types.ObjectId,
+  name: String,
+  city: { type: Schema.Types.ObjectId, ref: 'City' },
+  addresses: [{ type: Schema.Types.ObjectId, ref: 'Address' }]
+})
+
+var citySchema = Schema({
+  _id: Schema.Types.ObjectId,
+  name: String,
+  state: { type: Schema.Types.ObjectId, ref: 'State' },
+  neighborhoods: [{ type: Schema.Types.ObjectId, ref: 'Neighborhood' }]
+})
+
+var stateSchema = Schema({
+  _id: Schema.Types.ObjectId,
+  name: String,
+  country: { type: Schema.Types.ObjectId, ref: 'Country' },
+  cities: [{ type: Schema.Types.ObjectId, ref: 'City' }]
+})
+
+var countrySchema = Schema({
+  _id: Schema.Types.ObjectId,
+  name: String,
+  states: [{ type: Schema.Types.ObjectId, ref: 'State' }]
+})
 
 var researcherSchema = Schema({
   _id: Schema.Types.ObjectId,
