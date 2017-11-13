@@ -10,5 +10,23 @@ institution.find({"_id": ObjectId("<id>")}) // list by id
 institution.findOneAndUpdate({"_id": ObjectId("<id>")}, { $set: {name: "CEUB", emails: ["ceubinho@ceub.com"]} }, {upsert: true, returnNewDocument: true})
 institution.find() // list all
 institution.deleteOne( { "_id" : ObjectId("<id>") } );
+db.profissionals.aggregate({
+   $lookup:
+     {
+       from: "authors",
+       localField: "author",
+       foreignField: "_id",
+       as: "author_data"
+     }
+})
 
+db.searchers.aggregate({
+   $lookup:
+     {
+       from: "authors",
+       localField: "author",
+       foreignField: "_id",
+       as: "author_data"
+     }
+})
 menu

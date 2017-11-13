@@ -19,7 +19,7 @@ var addressSchema = Schema({
   number: Number,
   complement: String,
   postcode: Number,
-  address: String
+  address: String,
   neighborhood: { type: Schema.Types.ObjectId, ref: 'Neighborhood' }
 });
 
